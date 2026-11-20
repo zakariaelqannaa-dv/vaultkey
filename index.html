@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#101713">
+	<meta name="description" content="VaultKey is a private, browser-based password generator and password strength checker.">
+	<title>VaultKey — Password workspace</title>
+	<link rel="icon" type="image/svg+xml" href="favicon.svg">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="styles.css">
+	<script src="app.js" defer></script>
+</head>
+<body>
+	<div class="app-shell">
+		<header class="topbar">
+			<a class="brand" href="#top" aria-label="VaultKey home">
+				<span class="brand-mark" aria-hidden="true">
+					<svg viewBox="0 0 32 32" fill="none"><path d="M16 3.5 27 8v7.4c0 7.1-4.5 11.4-11 13.1C10.5 26.8 6 22.5 6 15.4V8l10-4.5Z" stroke="currentColor" stroke-width="1.7"/><path d="M12.6 15.8v-2a3.4 3.4 0 0 1 6.8 0v2m-7.5 0h8.2v6h-8.2v-6Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+				</span>
+				<span class="brand-name">vault<span>key</span></span>
+			</a>
+			<div class="topbar-right">
+				<span class="privacy-indicator"><span class="status-dot"></span> PRIVATE BY DESIGN</span>
+				<a class="top-link" href="#how-it-works">How it works <span aria-hidden="true">↗</span></a>
+			</div>
+		</header>
+
+		<main id="top">
+			<section class="intro">
+				<div class="eyebrow"><span class="eyebrow-line"></span> YOUR PERSONAL PASSWORD WORKSPACE</div>
+				<div class="intro-row">
+					<div>
+						<h1>Better passwords.<br><span>Less guesswork.</span></h1>
+						<p class="intro-copy">Create strong, unique passwords and get a practical read on their strength. Everything happens in your browser.</p>
+					</div>
+					<div class="intro-note">
+						<span class="note-index">01 / 02</span>
+						<span class="note-rule"></span>
+						<span class="note-text">Generate securely.<br>Check privately.</span>
+					</div>
+				</div>
+			</section>
+
+			<section class="workspace" aria-label="Password tools">
+				<article class="panel generator-panel">
+					<div class="panel-heading">
+						<div class="panel-kicker">01 — CREATE</div>
+						<h2>Password generator</h2>
+						<p>Build a password around the level of protection you need.</p>
+					</div>
+
+					<div class="password-output-wrap">
+						<div class="output-label-row"><label for="generated-password">YOUR NEW PASSWORD</label><span class="output-state"><span class="state-dot"></span> GENERATED LOCALLY</span></div>
+						<div class="password-output" id="password-output">
+							<output id="generated-password" class="generated-password" aria-live="polite">Generating…</output>
+							<div class="output-actions">
+								<button class="icon-button" id="toggle-generated" type="button" aria-label="Show password" title="Show or hide password">
+									<svg class="eye-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.4-6 9.5-6 9.5 6 9.5 6-3.4 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.7"/></svg>
+								</button>
+								<button class="icon-button copy-button" id="copy-generated" type="button" aria-label="Copy generated password" title="Copy password">
+									<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h1"/></svg>
+								</button>
+							</div>
+						</div>
+						<div class="output-footer"><span id="generated-meta">20 characters · mixed character set</span><span id="copy-feedback" class="copy-feedback" role="status" aria-live="polite"></span></div>
+					</div>
+
+					<div class="settings-block">
+						<div class="section-label-row"><span class="section-label">PASSWORD LENGTH</span><output class="length-value" id="length-value" for="length-slider">20</output></div>
+						<input class="length-slider" id="length-slider" type="range" min="8" max="64" value="20" step="1" aria-label="Password length">
+						<div class="range-labels"><span>8 characters</span><span>64 characters</span></div>
+					</div>
+
+					<div class="settings-block character-settings">
+						<div class="section-label">INCLUDE CHARACTERS</div>
+						<div class="option-grid">
+							<label class="option-card"><input type="checkbox" id="uppercase" checked><span class="custom-check" aria-hidden="true"></span><span class="option-symbol">A–Z</span><span class="option-name">Uppercase</span></label>
+							<label class="option-card"><input type="checkbox" id="lowercase" checked><span class="custom-check" aria-hidden="true"></span><span class="option-symbol">a–z</span><span class="option-name">Lowercase</span></label>
+							<label class="option-card"><input type="checkbox" id="numbers" checked><span class="custom-check" aria-hidden="true"></span><span class="option-symbol">0–9</span><span class="option-name">Numbers</span></label>
+							<label class="option-card"><input type="checkbox" id="symbols" checked><span class="custom-check" aria-hidden="true"></span><span class="option-symbol">#&amp;!</span><span class="option-name">Symbols</span></label>
+						</div>
+						<label class="switch-row" for="exclude-ambiguous"><span class="switch-copy"><span class="switch-title">Avoid ambiguous characters</span><span class="switch-description">Skip characters like O, 0, l and 1.</span></span><span class="switch"><input type="checkbox" id="exclude-ambiguous" checked><span class="switch-track"></span></span></label>
+					</div>
+
+					<div class="generator-bottom">
+						<p class="generator-hint"><span aria-hidden="true">✳</span> Each selected character type is included at least once.</p>
+						<button class="primary-button" id="generate-button" type="button"><span>Generate password</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5v15M2.5 10h15"/></svg></button>
+					</div>
+					<p class="form-error" id="generator-error" role="alert"></p>
+				</article>
+
+				<article class="panel checker-panel">
+					<div class="panel-heading">
+						<div class="panel-kicker">02 — CHECK</div>
+						<h2>Strength checker</h2>
+						<p>Test a password before you use it. Your input never leaves this page.</p>
+					</div>
+
+					<div class="checker-input-wrap">
+						<label for="check-password" class="section-label">ENTER A PASSWORD TO CHECK</label>
+						<div class="checker-input-row">
+							<input id="check-password" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Type or paste your password">
+							<button class="icon-button" id="toggle-check" type="button" aria-label="Show password" title="Show or hide password">
+								<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.4-6 9.5-6 9.5 6 9.5 6-3.4 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.7"/></svg>
+							</button>
+						</div>
+						<div class="privacy-inline"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="1.5"/><path d="M5.5 7V4.8a2.5 2.5 0 0 1 5 0V7"/></svg> Checked locally · Never stored or transmitted</div>
+					</div>
+
+					<div class="strength-result" id="strength-result" aria-live="polite">
+						<div class="strength-topline"><span class="section-label">STRENGTH ESTIMATE</span><span class="strength-score" id="strength-score">—</span></div>
+						<div class="strength-heading-row"><h3 id="strength-label">Waiting for input</h3><span class="strength-caption" id="strength-caption">Enter a password to begin</span></div>
+						<div class="strength-meter" id="strength-meter" role="meter" aria-label="Password strength" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="strength-fill"></span></div>
+						<div class="meter-scale"><span>WEAK</span><span>FAIR</span><span>STRONG</span><span>EXCELLENT</span></div>
+					</div>
+
+					<div class="checks-section">
+						<div class="section-label">SECURITY CHECKLIST</div>
+						<div class="check-list" id="check-list">
+							<div class="check-item pending" data-check="length"><span class="check-icon">–</span><span>At least 12 characters</span></div>
+							<div class="check-item pending" data-check="variety"><span class="check-icon">–</span><span>Uses multiple character types</span></div>
+							<div class="check-item pending" data-check="unique"><span class="check-icon">–</span><span>Avoids excessive repetition</span></div>
+							<div class="check-item pending" data-check="patterns"><span class="check-icon">–</span><span>Avoids common patterns</span></div>
+							<div class="check-item pending" data-check="common"><span class="check-icon">–</span><span>Is not a commonly used password</span></div>
+						</div>
+					</div>
+
+					<div class="recommendation" id="recommendation"><span class="recommendation-mark">↳</span><p>Enter a password to see tailored ways to improve it.</p></div>
+				</article>
+			</section>
+
+			<section class="bottom-strip" id="how-it-works">
+				<div class="strip-item"><span class="strip-number">A.</span><div><h3>Cryptographically random</h3><p>Generation uses your browser's Web Crypto API, not predictable Math.random().</p></div></div>
+				<div class="strip-item"><span class="strip-number">B.</span><div><h3>Private by default</h3><p>Your passwords are not sent to a server, saved, or logged by this app.</p></div></div>
+				<div class="strip-item"><span class="strip-number">C.</span><div><h3>Honest strength estimates</h3><p>The checker uses local heuristics. It is useful guidance, not a guarantee.</p></div></div>
+			</section>
+		</main>
+
+		<footer class="footer"><a class="footer-brand" href="#top">vaultkey<span>®</span></a><span>Make every sign-in count.</span><span class="footer-right">NO ACCOUNT · NO CLOUD · NO TRACKING</span></footer>
+	</div>
+	<div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
